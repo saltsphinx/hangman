@@ -29,6 +29,23 @@ class Game
     puts guess_tray
   end
 
+  def guess_word(guess_array)
+    if guess_array == chosen_word_array
+      self.user_guess_array = chosen_word_array
+    else
+      puts "#{guess_array.join} wasn't correct!"
+      self.user_fails += 1
+    end
+  end
+
+  def guess_letter(guess_string)
+    if chosen_word_array.include?(guess_string)
+      
+    else
+      
+    end
+  end
+
   def game_command(input)
     case 
     when crossed_letters.any? { |letter| input.include?(letter)}
