@@ -1,0 +1,12 @@
+The plan is to create a simple hangman like program.
+The computer chooses a random word from an array item,
+that gets the words from a .txt file.
+The user is shown a diagram of a gallow,
+The user has 6 turns(6 body parts) to guess the word
+
+Create a class that loads the words.txt file and turns it into
+an array
+Create a class that facilitates the game,
+Don't allow it to do too much besides assigning the word
+array to an instance variable, picking a random word and
+calling the game
