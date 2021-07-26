@@ -6,6 +6,10 @@ The user has 6 turns(6 body parts) to guess the word
 
 Create a class that loads the words.txt file and turns it into
 an array
+
+Create a class that displays the diagram, and another
+file for that class with HEREDOCs of the diagram in all
+7 states(state of no parts to state of all parts)
 Create a class that facilitates the game,
 Don't allow it to do too much besides assigning the word
 array to an instance variable, picking a random word and

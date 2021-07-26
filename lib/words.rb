@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Words
+  attr_accessor :dictionary
   def initialize
-    @words = File.readlines('words.txt', chomp: true)
+    @dictionary = File.readlines('words.txt', chomp: true)
   end
 end
