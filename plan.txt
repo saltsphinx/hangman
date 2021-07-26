@@ -14,3 +14,7 @@ Create a class that facilitates the game,
 Don't allow it to do too much besides assigning the word
 array to an instance variable, picking a random word and
 calling the game
+
+Create a method that checks if the users input is correct,
+and a method that adds incorrect guesses to an array, and 
+have the display method display it after each round
