@@ -9,13 +9,12 @@ class Game
 
   def initialize
     @words = Words.new
-    @crossed_letters = []
   end
 
   def game_setup
-    self.user_fails = 0
+    self.user_fails = 0  
+    @crossed_letters = []
     self.chosen_word_array = words.dictionary.sample.downcase.chars
-    p chosen_word_array
     self.user_guess_array = Array.new(chosen_word_array.length, '_')
   end
 
@@ -29,15 +28,16 @@ class Game
   end
 
   def display
-    puts diagram[user_fails]
-    puts guess_tray
+    puts(diagram[user_fails])
+    puts(guess_tray)
+    puts("Crossed out letters: #{crossed_letters.join(', ')}") unless crossed_letters.empty?
   end
 
   def guess_word(guess_array)
     if guess_array == chosen_word_array
       self.user_guess_array = chosen_word_array
     else
-      puts "#{guess_array.join} wasn't correct!"
+      puts("#{guess_array.join} wasn't correct!")
       self.user_fails += 1
     end
   end
@@ -48,7 +48,7 @@ class Game
         user_guess_array[i] = letter if letter.eql?(guess_string)
       end
     else
-      puts "#{guess_string} wasn't correct!"
+      puts("#{guess_string} wasn't correct!")
       self.user_fails += 1
       crossed_letters.push(guess_string)
     end
@@ -58,17 +58,17 @@ class Game
     case 
     #binding.pry
     when crossed_letters.any? { |letter| input.include?(letter)}
-      puts "\"#{input.join.upcase}\" includes crossed out letters!"
+      puts("\"#{input.join.upcase}\" includes crossed out letters!")
       user_turn
     when input.length >= chosen_word_array.length
       guess_word(input[0...chosen_word_array.length])
     when ('a'..'z').include?(input.first) && user_guess_array.any? { |letter| input.first == letter}
-      puts "You've already confirmed \"#{input.first.upcase}\"!"
+      puts("You've already confirmed \"#{input.first.upcase}\"!")
       user_turn
     when ('a'..'z').include?(input.first)
       guess_letter(input.first)
     else
-      puts "Enter a letter."
+      puts("Enter a letter.")
       user_turn
     end
   end
@@ -78,26 +78,37 @@ class Game
     game_command(user_input)
   end
 
+  def game_over?
+    user_guess_array.eql?(chosen_word_array)
+  end
+
+  def save_game
+    
+  end
+
   def begin_game
     until user_fails.eql?(6)
-      user_turn
       display
+      user_turn
+      break if game_over?
     end
   end
 
   def game_end
-
+    puts "The word was: #{chosen_word_array.join.capitalize}"
+    user_guess_array == chosen_word_array ? puts('You win!') : puts('Better luck next time!')
+    puts("Play again?\n\'Y\'es or \'N\'o.")
+    gets.chomp.downcase.chr == 'y' ? play : puts('Game ended.')
   end
 
   def play
     game_setup
-    display
     begin_game
     game_end
   end
 end
 
-puts 'Game loading...'
+puts('Game loading...')
 game = Game.new
-puts 'Game loaded'
+puts('Game loaded')
 game.play
